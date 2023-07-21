@@ -9,6 +9,7 @@ import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
 import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
+import { viewsRouter } from './routes/views.router.js';
 
 dotenv.config()
 const app = express();
@@ -21,9 +22,10 @@ app.use(cookieParser());
 // Definir donde podemos ver la documentación 
 app.use("/api/docs", swaggerUI.serve,swaggerUI.setup(swaggerSpecs)) // endpoint donde podemos ver la documentación 
 
+app.use(viewsRouter)
 app.use('/api/users',usersRouter);
 app.use('/api/pets',petsRouter);
 app.use('/api/adoptions',adoptionsRouter);
 app.use('/api/sessions',sessionsRouter);
 
-app.listen(PORT,()=>console.log(`Listening on ${PORT}`))
+app.listen(PORT,()=>console.log(`Server Listening on ${PORT}`))
